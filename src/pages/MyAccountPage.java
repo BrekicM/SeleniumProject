@@ -8,6 +8,8 @@ public class MyAccountPage {
 	WebDriver driver;
 	WebElement myAccountPageLabel;
 	WebElement myAddressesButton;
+	WebElement myPersonalInfoButton;
+	WebElement myWishlistsButton;
 	
 	public MyAccountPage(WebDriver driver) {
 		//super();
@@ -22,10 +24,24 @@ public class MyAccountPage {
 		return driver.findElement(By.xpath("//*[@id='center_column']/div/div[1]/ul/li[3]/a/span"));
 	}
 	
+	public WebElement getMyPersonalInfoButton() {
+		return driver.findElement(By.xpath("//*[@id='center_column']/div/div[1]/ul/li[4]/a/span"));
+	}
+
+	public WebElement getMyWishlistsButton() {
+		return driver.findElement(By.xpath("//*[@id='center_column']/div/div[2]/ul/li"));
+	}
+
 	public void clickOnMyAddressesButton() {
 		getMyAddressesButton().click();
 	}
 	
+	public void clickOnMyPersonalInfoButton() {
+		getMyPersonalInfoButton().click();
+	}
 	
+	public void clickOnMyWishlistsButton() {
+		getMyWishlistsButton().click();
+	}
 	
 }

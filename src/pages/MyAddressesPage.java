@@ -12,10 +12,14 @@ public class MyAddressesPage {
 	WebElement cityField;
 	WebElement zipCodeField;
 	WebElement mobilePhoneNumberField;
+	WebElement addressAliasField;
 	WebElement saveButton;
 	WebElement currentAddressLabel;
 	WebElement addNewAddressButton;
 	WebElement stateDropdownSelection;
+	WebElement submitButton;
+	WebElement secondAddressLabel;
+	WebElement deleteSecondAddressButton;
 	
 	public MyAddressesPage(WebDriver driver) {
 		//super();
@@ -53,11 +57,26 @@ public class MyAddressesPage {
 		return driver.findElement(By.id("postcode"));
 	}
 	
-	
-	
 	public WebElement getMobilePhoneNumberField() {
-		return mobilePhoneNumberField;
+		return driver.findElement(By.id("phone_mobile"));
 	}
+	
+	public WebElement getAddressAliasField() {
+		return driver.findElement(By.id("alias"));
+	}
+	
+	public WebElement getSubmitButton() {
+		return driver.findElement(By.id("submitAddress"));
+	}
+	
+	public WebElement getSecondAddressLabel() {
+		return driver.findElement(By.xpath("//div[@class='addresses']/div/div[2]/ul/li/h3"));
+	}
+	
+	public WebElement getDeleteSecondAddressButton() {
+		return driver.findElement(By.xpath("//div[@class='addresses']/div/div[2]/ul/li[9]/a[2]"));
+	}
+	
 	public void clickUpdateAddressButton() {
 		getUpdateAddressButton().click();
 	}
@@ -76,8 +95,8 @@ public class MyAddressesPage {
 	}
 	
 	public void clickCityField() {
-		getAddressField().click();
-		getAddressField().clear();
+		getCityField().click();
+		getCityField().clear();
 	}
 	
 	public void clickZipCodeField() {
@@ -85,9 +104,27 @@ public class MyAddressesPage {
 		getZipCodeField().clear();
 	}
 	
-	public void selectStateFromDropDown(String state) {
+	public void clickMobilePhoneNumberField() {
+		getMobilePhoneNumberField().click();
+		getMobilePhoneNumberField().clear();
+	}
+	
+	public void clickAddressAliasField() {
+		getAddressAliasField().click();
+		getAddressAliasField().clear();
+	}
+	
+	public void clickSubmitAddressButton() {
+		getSubmitButton().click();
+	}
+	
+	public void clickDeleteSecondAddressButton() {
+		getDeleteSecondAddressButton().click();
+	}
+	
+	public void selectStateFromDropDown(int index) {
 		Select stateFromDropDown = new Select(getStateDropdownSelection());
-		stateFromDropDown.selectByValue(state);
+		stateFromDropDown.selectByIndex(index);
 	}
 	
 }

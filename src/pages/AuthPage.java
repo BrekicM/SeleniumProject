@@ -24,11 +24,9 @@ public class AuthPage {
 		return driver.findElement(By.id("passwd"));
 	}
 	
-	
 	public WebElement getSignInButton() {
 		return driver.findElement(By.id("SubmitLogin"));
 	}
-	
 	
 	public WebElement getInvalidEmailAddressLabel() {
 		return driver.findElement(By.cssSelector("div.alert.alert-danger"));
