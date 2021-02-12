@@ -26,8 +26,9 @@ public class AddToCartTests extends TestBase{
 	@Test
 	public void addOneItemToCartAndIncreaseQuantity() throws InterruptedException {
 		addItemToCart();
-		shoppingCartPage.clickPlusButton();
-		shoppingCartPage.clickPlusButton();
+		for (int i = 1; i < 3; i++) {
+			shoppingCartPage.clickPlusButton();
+		}
 		Thread.sleep(3000);
 		Assert.assertEquals(shoppingCartPage.getNumberOfProductsInCart().getText(), excelReader.getCellData("TC5-ProductsToCart", 12, 3));
 	}
