@@ -1,0 +1,52 @@
+package pages;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+
+public class ShoppingCartPage {
+	WebDriver driver;
+	WebElement plusButton;
+	WebElement proceedToCheckoutButton;
+	WebElement productQuantityField;
+	WebElement deleteFromCartIcon;
+	WebElement oneItemInCartLabel;
+	
+	public ShoppingCartPage(WebDriver driver) {
+		super();
+		this.driver = driver;
+	}
+
+	public WebElement getPlusButton() {
+		return driver.findElement(By.className("icon-plus"));
+	}
+
+	public WebElement getProceedToCheckoutButton() {
+		return driver.findElement(By.xpath("//p[contains(@class,'cart_navigation')]/a[1]"));
+	}
+	
+	public WebElement getProductQuantityField() {
+		return driver.findElement(By.xpath("//input[contains(@class, 'cart_quantity_input')]"));
+	}
+
+	public WebElement getDeleteFromCartIcon() {
+		return driver.findElement(By.className("icon-trash"));
+	}
+	
+	public WebElement getOneItemInCartLabel() {
+		return driver.findElement(By.xpath("//*[@id=\"layer_cart\"]/div[1]/div[1]/h2"));
+	}
+
+	public void clickPlusButton() {
+		getPlusButton().click();
+	}
+	
+	public void clickProceedToCheckoutButton() {
+		getProceedToCheckoutButton().click();
+	}
+	
+	public void clickDeleteFromCartIcon() {
+		getDeleteFromCartIcon().click();
+	}
+	
+}

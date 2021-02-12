@@ -8,10 +8,12 @@ import org.testng.annotations.BeforeClass;
 
 import pages.AuthPage;
 import pages.IdentityPage;
+import pages.ItemPage;
 import pages.MainPage;
 import pages.MyAccountPage;
 import pages.MyAddressesPage;
 import pages.MyWishlistPage;
+import pages.ShoppingCartPage;
 
 public class TestBase {
 	WebDriver driver;
@@ -24,6 +26,8 @@ public class TestBase {
 	MyAddressesPage myAdressesPage;
 	IdentityPage identityPage;
 	MyWishlistPage myWishlistPage;
+	ShoppingCartPage shoppingCartPage;
+	ItemPage itemPage;
 	
 	public void logIn(String email, String password) {
 		mainPage.clickOnSignInButton();
@@ -50,6 +54,8 @@ public class TestBase {
 		this.myAdressesPage = new MyAddressesPage(driver);
 		this.identityPage = new IdentityPage(driver);
 		this.myWishlistPage = new MyWishlistPage(driver);
+		this.shoppingCartPage = new ShoppingCartPage(driver);
+		this.itemPage = new ItemPage(driver);
 		driver.manage().window().maximize();
 	}
 		

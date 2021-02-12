@@ -59,7 +59,8 @@ public class MyAccountTests extends TestBase{
 		myAdressesPage.clickDeleteSecondAddressButton();
 		driver.switchTo().alert().accept();
 		assertSecondAddressNotPresent();
-		//Assert.assertEquals(false, myAdressesPage.getSecondAddressLabel().); na osnovu cega asertovati?		
+		//Assert.assertEquals(false, myAdressesPage.getSecondAddressLabel().); na osnovu cega asertovati?
+		//odraditi assert preko liste
 	}
 	
 	@AfterMethod

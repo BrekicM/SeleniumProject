@@ -17,7 +17,7 @@ public class MyWishlistTests extends TestBase{
 		Thread.sleep(2000);
 	}
 	
-	//@Test(priority = 5)
+	@Test(priority = 5)
 	public void addWishList() {
 		//String email = excelReader.getCellData("TC1-Login", 5, 3);
 		//String password = excelReader.getCellData("TC1-Login", 6, 3);
@@ -33,22 +33,35 @@ public class MyWishlistTests extends TestBase{
 		int i;
 		validLogIn();
 		myAccountPage.clickOnMyWishlistsButton();
+		List<WebElement> numberOfWishlistsBeforeAdd = driver.findElements(By.xpath("//div[@id='block-history']/table/tbody/tr"));
+		System.out.println(numberOfWishlistsBeforeAdd);
 		for (i = 2; i < 6; i++) {
 			createWishLists(excelReader.getCellData("TC4-MyWishlist", 11, 3) + i);
 		}
-		verifyNumberOfWishlists(i);	
+		List<WebElement> numberOfWishlistsAfterAdd = driver.findElements(By.xpath("//div[@id='block-history']/table/tbody/tr"));
+		System.out.println(numberOfWishlistsBeforeAdd);
+		Assert.assertNotEquals(numberOfWishlistsBeforeAdd, numberOfWishlistsAfterAdd);
+		/*if (numberOfWishlistsBeforeAdd != numberOfWishlistsAfterAdd) {
+			System.out.println("Wishlists added.");
+		}*/
+		
+		//tabela.findElements
 	}
 	
-	//@Test(priority = 15)
-	public void deleteWishList() {
+	@Test(priority = 15)
+	public void deleteWishList() throws InterruptedException {
 		validLogIn();
 		myAccountPage.clickOnMyWishlistsButton();
+		while (myWishlistPage.getRemoveButton().isDisplayed()) {
 		myWishlistPage.clickRemoveButton();
+		Thread.sleep(2000);
 		driver.switchTo().alert().accept();
-		
+		Thread.sleep(2000);
+		}
+		Assert.assertEquals(false, myWishlistPage.getFirstWishlistLabel().isDisplayed());
 	}
 	
-	//@AfterMethod
+	@AfterMethod
 	public void clearRefresh() {
 		driver.manage().deleteAllCookies();
 		driver.navigate().refresh();
@@ -67,7 +80,7 @@ public class MyWishlistTests extends TestBase{
 		myWishlistPage.clickSaveButton();
 	}
 	
-	public void verifyNumberOfWishlists(int i) {
+	/*public void verifyNumberOfWishlists(int i) {
 	List<WebElement> numberOfWishlists = driver.findElements(By.xpath("//div[@id='block-history']/table/tbody/tr"));
 	if(numberOfWishlists.size() == i){
 		 System.out.println(i + "wishlists are present");
@@ -75,7 +88,7 @@ public class MyWishlistTests extends TestBase{
 		else{
 		 System.out.println("Incorrect number of wishlists present");
 		}
-	}
+	}*/
 	
 	/*public void assertSecondAddressNotPresent() {
 		List<WebElement> dynamicElement = driver.findElements(By.xpath("//div[@id='block-history']/table/tbody/tr/td/a"));

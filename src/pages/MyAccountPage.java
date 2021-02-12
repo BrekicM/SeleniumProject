@@ -10,6 +10,7 @@ public class MyAccountPage {
 	WebElement myAddressesButton;
 	WebElement myPersonalInfoButton;
 	WebElement myWishlistsButton;
+	WebElement homeButton;
 	
 	public MyAccountPage(WebDriver driver) {
 		//super();
@@ -31,6 +32,10 @@ public class MyAccountPage {
 	public WebElement getMyWishlistsButton() {
 		return driver.findElement(By.xpath("//*[@id='center_column']/div/div[2]/ul/li"));
 	}
+	
+	public WebElement getHomeButton() {
+		return driver.findElement(By.xpath("//a[contains(@title, 'Home')]"));
+	}
 
 	public void clickOnMyAddressesButton() {
 		getMyAddressesButton().click();
@@ -42,6 +47,10 @@ public class MyAccountPage {
 	
 	public void clickOnMyWishlistsButton() {
 		getMyWishlistsButton().click();
+	}
+	
+	public void clickOnHomeButton() {
+		getHomeButton().click();
 	}
 	
 }

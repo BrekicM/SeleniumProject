@@ -53,10 +53,4 @@ public class LogInTests extends TestBase{
 		driver.navigate().refresh();
 	}
 	
-	/*public void logIn(String email, String password) {
-		mainPage.clickOnSignInButton();
-		authPage.inputLoginEmail(email);
-		authPage.inputPassword(password);
-		authPage.clickSignInButton();
-	}*/
 }
