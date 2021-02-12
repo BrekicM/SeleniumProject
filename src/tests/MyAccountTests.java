@@ -29,18 +29,7 @@ public class MyAccountTests extends TestBase{
 		Assert.assertEquals(myAdressesPage.getCurrentAddressLabel().getText(), newAddress);
 		revertAddress(oldAddress);
 		Assert.assertEquals(myAdressesPage.getCurrentAddressLabel().getText(), oldAddress);
-		/*myAccountPage.clickOnMyAddressesButton();
-		myAdressesPage.clickUpdateAddressButton();
-		myAdressesPage.clickAddressField();
-		myAdressesPage.getAddressField().sendKeys(newAddress);
-		myAdressesPage.clickSaveButton();*/
-		//Assert.assertEquals(myAdressesPage.getCurrentAddressLabel().getText(), newAddress);
-		//revertToOriginalAddress();
-		/*myAdressesPage.clickUpdateAddressButton();
-		myAdressesPage.clickAddressField();
-		myAdressesPage.getAddressField().sendKeys(oldAddress);
-		myAdressesPage.clickSaveButton();
-		Assert.assertEquals(myAdressesPage.getCurrentAddressLabel().getText(), oldAddress);*/
+
 	}
 	
 	@Test(priority = 5)
@@ -58,9 +47,8 @@ public class MyAccountTests extends TestBase{
 		myAccountPage.clickOnMyAddressesButton();
 		myAdressesPage.clickDeleteSecondAddressButton();
 		driver.switchTo().alert().accept();
-		assertSecondAddressNotPresent();
-		//Assert.assertEquals(false, myAdressesPage.getSecondAddressLabel().); na osnovu cega asertovati?
-		//odraditi assert preko liste
+		Assert.assertEquals(myAdressesPage.getDeleteButtons().size(), 1);
+		
 	}
 	
 	@AfterMethod
@@ -90,16 +78,6 @@ public class MyAccountTests extends TestBase{
 		myAdressesPage.clickSubmitAddressButton();
 	}
 	
-	/*public void revertToOriginalAddress() {
-		String oldAddress = excelReader.getCellData("TC2-MyAccountSection", 9, 3);
-		
-		myAdressesPage.clickUpdateAddressButton();
-		myAdressesPage.clickAddressField();
-		myAdressesPage.getAddressField().sendKeys(oldAddress);
-		myAdressesPage.clickSaveButton();
-		Assert.assertEquals(myAdressesPage.getCurrentAddressLabel().getText(), oldAddress);
-	}*/
-	
 	public void changeAddress(String address) {
 		myAccountPage.clickOnMyAddressesButton();
 		myAdressesPage.clickUpdateAddressButton();
@@ -115,14 +93,4 @@ public class MyAccountTests extends TestBase{
 		myAdressesPage.clickSaveButton();	
 	}
 	
-	
-	public void assertSecondAddressNotPresent() {
-		List<WebElement> dynamicElement = driver.findElements(By.xpath("//div[@class='addresses']/div/div[2]/ul/li/h3"));
-		if(dynamicElement.size() != 0){
-			 System.out.println("Element present");
-			}
-			else{
-			 System.out.println("Element not present");
-			}
-	}
 }

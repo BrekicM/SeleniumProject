@@ -11,6 +11,8 @@ public class ShoppingCartPage {
 	WebElement productQuantityField;
 	WebElement deleteFromCartIcon;
 	WebElement oneItemInCartLabel;
+	WebElement numberOfProductsInCart;
+	WebElement cartEmptyLabel;
 	
 	public ShoppingCartPage(WebDriver driver) {
 		super();
@@ -26,7 +28,7 @@ public class ShoppingCartPage {
 	}
 	
 	public WebElement getProductQuantityField() {
-		return driver.findElement(By.xpath("//input[contains(@class, 'cart_quantity_input')]"));
+		return driver.findElement(By.xpath("//table[@id='cart_summary']/tbody/tr/td[5]/input[1]"));
 	}
 
 	public WebElement getDeleteFromCartIcon() {
@@ -35,6 +37,14 @@ public class ShoppingCartPage {
 	
 	public WebElement getOneItemInCartLabel() {
 		return driver.findElement(By.xpath("//*[@id=\"layer_cart\"]/div[1]/div[1]/h2"));
+	}
+
+	public WebElement getNumberOfProductsInCart() {
+		return driver.findElement(By.id("summary_products_quantity"));
+	}
+
+	public WebElement getCartEmptyLabel() {
+		return driver.findElement(By.xpath("//p[contains(@class, 'alert')]"));
 	}
 
 	public void clickPlusButton() {

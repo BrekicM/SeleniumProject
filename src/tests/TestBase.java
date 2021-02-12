@@ -4,6 +4,8 @@ import java.io.IOException;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 
 import pages.AuthPage;
@@ -28,6 +30,7 @@ public class TestBase {
 	MyWishlistPage myWishlistPage;
 	ShoppingCartPage shoppingCartPage;
 	ItemPage itemPage;
+	WebDriverWait wait;
 	
 	public void logIn(String email, String password) {
 		mainPage.clickOnSignInButton();
@@ -56,10 +59,11 @@ public class TestBase {
 		this.myWishlistPage = new MyWishlistPage(driver);
 		this.shoppingCartPage = new ShoppingCartPage(driver);
 		this.itemPage = new ItemPage(driver);
+		this.wait = new WebDriverWait(driver, 10);
 		driver.manage().window().maximize();
 	}
 		
-	//@AfterClass
+	@AfterClass
 	public void afterClass() {
 		driver.close();
 	}

@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -19,46 +21,42 @@ public class MyWishlistTests extends TestBase{
 	
 	@Test(priority = 5)
 	public void addWishList() {
-		//String email = excelReader.getCellData("TC1-Login", 5, 3);
-		//String password = excelReader.getCellData("TC1-Login", 6, 3);
 		String myWishList1 = excelReader.getCellData("TC4-MyWishlist", 6, 3);
 		validLogIn();		
 		createWishList(myWishList1);
 		Assert.assertEquals(true, myWishlistPage.getFirstWishlistLabel().isDisplayed());
-		//System.out.println(myWishlistPage.getFirstWishlistLabel().getText());
 	}
 	
 	@Test(priority = 10)
 	public void addMultipleWishLists() {
-		int i;
 		validLogIn();
 		myAccountPage.clickOnMyWishlistsButton();
-		List<WebElement> numberOfWishlistsBeforeAdd = driver.findElements(By.xpath("//div[@id='block-history']/table/tbody/tr"));
-		System.out.println(numberOfWishlistsBeforeAdd);
-		for (i = 2; i < 6; i++) {
+		int beforeAdd = myWishlistPage.getNumberOfWishlists().size();
+		System.out.println(beforeAdd);
+		for (int i = 2; i < 6; i++) {
 			createWishLists(excelReader.getCellData("TC4-MyWishlist", 11, 3) + i);
+			beforeAdd++;
 		}
-		List<WebElement> numberOfWishlistsAfterAdd = driver.findElements(By.xpath("//div[@id='block-history']/table/tbody/tr"));
-		System.out.println(numberOfWishlistsBeforeAdd);
-		Assert.assertNotEquals(numberOfWishlistsBeforeAdd, numberOfWishlistsAfterAdd);
-		/*if (numberOfWishlistsBeforeAdd != numberOfWishlistsAfterAdd) {
-			System.out.println("Wishlists added.");
-		}*/
-		
-		//tabela.findElements
+		int afterAdd = myWishlistPage.getNumberOfWishlists().size();
+		System.out.println(afterAdd);
+		Assert.assertEquals(afterAdd, beforeAdd);
 	}
 	
 	@Test(priority = 15)
-	public void deleteWishList() throws InterruptedException {
+	public void deleteWishList() throws InterruptedException {			
 		validLogIn();
 		myAccountPage.clickOnMyWishlistsButton();
-		while (myWishlistPage.getRemoveButton().isDisplayed()) {
-		myWishlistPage.clickRemoveButton();
-		Thread.sleep(2000);
-		driver.switchTo().alert().accept();
-		Thread.sleep(2000);
+		int beforeDelete = myWishlistPage.getNumberOfWishlists().size();
+		for (int i = 0; i < beforeDelete; i++) {
+			wait.until(ExpectedConditions.elementToBeClickable(myWishlistPage.getRemoveButton()));
+			myWishlistPage.clickRemoveButton();
+			//Thread.sleep(5000);
+			//wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@id='block-history']/table/tbody/tr")));
+			driver.switchTo().alert().accept();
+			Thread.sleep(3000);
 		}
-		Assert.assertEquals(false, myWishlistPage.getFirstWishlistLabel().isDisplayed());
+		int afterDelete = myWishlistPage.getNumberOfWishlists().size();
+		Assert.assertEquals(afterDelete, 0);
 	}
 	
 	@AfterMethod
@@ -79,24 +77,4 @@ public class MyWishlistTests extends TestBase{
 		myWishlistPage.getWishlistNameField().sendKeys(wishListName);
 		myWishlistPage.clickSaveButton();
 	}
-	
-	/*public void verifyNumberOfWishlists(int i) {
-	List<WebElement> numberOfWishlists = driver.findElements(By.xpath("//div[@id='block-history']/table/tbody/tr"));
-	if(numberOfWishlists.size() == i){
-		 System.out.println(i + "wishlists are present");
-		}
-		else{
-		 System.out.println("Incorrect number of wishlists present");
-		}
-	}*/
-	
-	/*public void assertSecondAddressNotPresent() {
-		List<WebElement> dynamicElement = driver.findElements(By.xpath("//div[@id='block-history']/table/tbody/tr/td/a"));
-		if(dynamicElement.size() != 0){
-			 System.out.println("Element present");
-			}
-			else{
-			 System.out.println("Element not present");
-			}
-	} */
 }

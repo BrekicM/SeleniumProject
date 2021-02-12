@@ -1,5 +1,7 @@
 package pages;
 
+import java.util.List;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -20,6 +22,7 @@ public class MyAddressesPage {
 	WebElement submitButton;
 	WebElement secondAddressLabel;
 	WebElement deleteSecondAddressButton;
+	List<WebElement> deleteButtons;
 	
 	public MyAddressesPage(WebDriver driver) {
 		//super();
@@ -75,6 +78,10 @@ public class MyAddressesPage {
 	
 	public WebElement getDeleteSecondAddressButton() {
 		return driver.findElement(By.xpath("//div[@class='addresses']/div/div[2]/ul/li[9]/a[2]"));
+	}
+	
+	public List<WebElement> getDeleteButtons() {
+		return driver.findElements(By.xpath("//a[contains(@title, 'Delete')]"));
 	}
 	
 	public void clickUpdateAddressButton() {
